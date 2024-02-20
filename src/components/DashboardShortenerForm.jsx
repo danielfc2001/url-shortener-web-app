@@ -29,7 +29,7 @@ const DashboardShortenerForm = () => {
         <div className="shortener-form-user-input-group">
           <input
             type="text"
-            {...register("url", {
+            {...register("baseUrl", {
               required: { value: true, message: "Este campo es requerido." },
             })}
             placeholder="Ingrese la url"

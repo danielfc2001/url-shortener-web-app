@@ -99,7 +99,7 @@ export const ShortenerProvider = ({ children }) => {
 
   const createUserShortenedUrl = async (data) => {
     const jsonData = JSON.stringify({
-      url: data.url,
+      baseUrl: data.baseUrl,
       title: data.title.length != 0 ? data.title : undefined,
       description: data.description.length != 0 ? data.description : undefined,
     });
@@ -112,7 +112,6 @@ export const ShortenerProvider = ({ children }) => {
         body: jsonData,
         mode: "cors",
         headers: {
-          Cookie: `token, ${localStorage.getItem("token")}`,
           "Content-type": "application/json",
         },
       });
