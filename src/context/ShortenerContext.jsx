@@ -8,7 +8,7 @@ export const useShortener = () => {
   return context;
 };
 
-const HOSTNAME = "http://127.0.0.1:3000";
+const HOSTNAME = "https://url-shortener-node-server.onrender.com/";
 
 export const ShortenerProvider = ({ children }) => {
   const [url, setUrl] = useState();

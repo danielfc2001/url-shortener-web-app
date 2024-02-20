@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const HOSTNAME = "http://127.0.0.1:3000";
+const HOSTNAME = "https://url-shortener-node-server.onrender.com/";
 
 const useDashboardModalStats = (id) => {
   const [todayTraffic, setTodayTraffic] = useState();

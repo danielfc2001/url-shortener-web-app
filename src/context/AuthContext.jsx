@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
-const HOSTNAME = "http://127.0.0.1:3000";
+const HOSTNAME = "https://url-shortener-node-server.onrender.com/";
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
