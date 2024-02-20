@@ -8,7 +8,7 @@ export const useShortener = () => {
   return context;
 };
 
-const HOSTNAME = "https://url-shortener-node-server.onrender.com/";
+const HOSTNAME = "https://url-shortener-node-server.onrender.com";
 
 export const ShortenerProvider = ({ children }) => {
   const [url, setUrl] = useState();
