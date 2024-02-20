@@ -123,8 +123,8 @@ export const ShortenerProvider = ({ children }) => {
       const responseData = await response.json();
       if (!responseData)
         throw new Error("A ocurrido un error al procesar los datos.");
-      setShortenedsUrls(responseData.urls);
-      setQuickSearchShorteneds(responseData.urls);
+      setShortenedsUrls(responseData.data);
+      setQuickSearchShorteneds(responseData.data);
       setInsertStatus({
         status: 200,
         message: "Se a creado el nuevo enlace.",
