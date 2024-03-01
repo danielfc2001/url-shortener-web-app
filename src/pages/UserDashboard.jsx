@@ -7,12 +7,8 @@ import DashboardSearch from "../components/DashboardSearch";
 import DashboardUrlsLoader from "../components/DashboardUrlsLoader";
 
 const UserDashboard = () => {
-  const {
-    shortenedUrls,
-    pendingShorteneds,
-    modalCardActive,
-    quickSearchShorteneds,
-  } = useShortener();
+  const { pendingShorteneds, modalCardActive, quickSearchShorteneds } =
+    useShortener();
   return (
     <>
       <section className="d-flex align-items-start justify-content-center mt-3">

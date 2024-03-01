@@ -5,7 +5,6 @@ import DashboardModalTimestamp from "../components/DashboardModalTimestamp";
 import DashboardModalLockedBtn from "../components/DashboardModalLockedBtn";
 import DashboardModalDescriptionField from "../components/DashboardModalDescriptionField";
 import DashboardModalStats from "../components/DashboardModalStats";
-import DashboardModalStatsChart from "../components/DashboardModalStatsChart";
 import useDashboardModal from "../hooks/useDashboardModal";
 
 const UrlDescription = () => {
@@ -61,7 +60,7 @@ const UrlDescription = () => {
           <DashboardModalStats id={id} />
         </div>
       </div>
-      <DashboardModalStatsChart id={id} />
+      {/* <DashboardModalStatsChart id={id} /> */}
     </>
   );
 };

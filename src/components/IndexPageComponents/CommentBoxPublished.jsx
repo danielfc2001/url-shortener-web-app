@@ -1,5 +1,6 @@
 import useComments from "../../hooks/useComments";
 import useCommentStorage from "../../hooks/useCommentsStore";
+import CommentBoxChart from "./CommentBoxChart";
 
 const CommentBoxPublished = () => {
   const { commentsPendings } = useComments();
@@ -39,7 +40,7 @@ const CommentBoxPublished = () => {
             ))}
         </div>
         <div className="comment-box-rate-container">
-          <h5 className="comment-box-rate-title">Calificaciones:</h5>
+          <CommentBoxChart />
         </div>
       </div>
     </>
