@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-
-const HOSTNAME = "https://url-shortener-node-server.onrender.com";
+import { HOSTNAME } from "../env/externalsUrls.js";
 
 const useDashboardModalStats = (id) => {
   const [todayTraffic, setTodayTraffic] = useState();
   const [weekTraffic, setWeekTraffic] = useState([]);
+  const [monthTraffic, setMonthTraffic] = useState([]);
   const [requestError, setRequestError] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
@@ -18,6 +18,7 @@ const useDashboardModalStats = (id) => {
       if (!data) throw new Error();
       setTodayTraffic(data.today);
       setWeekTraffic(data.lastWeek);
+      setMonthTraffic(data.lastMonth);
       return;
     } catch (error) {
       console.log(error);
@@ -34,6 +35,7 @@ const useDashboardModalStats = (id) => {
   return {
     todayTraffic,
     weekTraffic,
+    monthTraffic,
     requestError,
     isPending,
   };

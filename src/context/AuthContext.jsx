@@ -1,9 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { HOSTNAME } from "../env/externalsUrls.js";
 
 const AuthContext = createContext();
-
-const HOSTNAME = "https://url-shortener-node-server.onrender.com";
 
 export const useAuth = () => {
   const context = useContext(AuthContext);

@@ -14,9 +14,24 @@ import LoginToasts from "./components/LoginToasts";
 import NotFound from "./pages/404";
 import NavbarLink from "./components/NavbarLink";
 import Logout from "./pages/Logout";
+import UrlDescription from "./pages/UrlDescription";
+import { useState } from "react";
 
 function App() {
+  const [navbarVisible, setNavbarVisible] = useState();
   const { userAuthenticated, statusAuthenticated } = useAuth();
+
+  const handleToggleClick = (e) => {
+    const togglerBtn = document.getElementById("togglerBtn");
+    if (navbarVisible === "show") {
+      togglerBtn.classList.remove("active");
+      setNavbarVisible();
+      return;
+    }
+    togglerBtn.classList.add("active");
+    setNavbarVisible("show");
+  };
+
   return (
     <>
       <main id="appContainer" className="container px-5">
@@ -24,7 +39,15 @@ function App() {
           <Link to="/" className="page-navbar-brand">
             Url.ZIP
           </Link>
-          <ul className="page-navbar-nav">
+          <button
+            id="togglerBtn"
+            type="button"
+            className="page-navbar-toggle"
+            onClick={handleToggleClick}
+          >
+            <i className="bi bi-list"></i>
+          </button>
+          <ul className={`page-navbar-nav ${navbarVisible}`}>
             <NavbarLink to={"/"} name={"Inicio"}>
               <i className="bi bi-house me-1"></i>
             </NavbarLink>
@@ -46,15 +69,23 @@ function App() {
         </Navbar>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/access/" element={<AccessPage />}>
-            <Route path="/access/login" element={<LoginSection />} />
-            <Route path="/access/register" element={<RegisterSection />} />
+          <Route path="/access//*" element={<AccessPage />}>
+            <Route path="login" element={<LoginSection />} />
+            <Route path="register" element={<RegisterSection />} />
           </Route>
           <Route
             path="/user-dashboard"
             element={
               <ProtectedRoute>
                 <UserDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user-dashboard/url/:id"
+            element={
+              <ProtectedRoute>
+                <UrlDescription />
               </ProtectedRoute>
             }
           />

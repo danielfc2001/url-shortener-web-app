@@ -1,11 +1,11 @@
 import React from "react";
-import { useShortener } from "../context/ShortenerContext";
+import { useNavigate } from "react-router-dom";
 
 const DashboardUrlCardOptBtn = ({ id }) => {
-  const { handleShowModalCard } = useShortener();
+  const navigate = useNavigate();
 
   const handleClick = (e) => {
-    handleShowModalCard(id);
+    navigate(`/user-dashboard/url/${id}`);
   };
   return (
     <button className="dashboard-url-card-options-btn" onClick={handleClick}>

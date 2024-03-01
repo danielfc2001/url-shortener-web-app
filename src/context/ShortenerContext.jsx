@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { HOSTNAME } from "../env/externalsUrls.js";
 
 const ShortenerContext = createContext();
 
@@ -7,8 +8,6 @@ export const useShortener = () => {
   if (!context) throw new Error("Context must be use within a Provider");
   return context;
 };
-
-const HOSTNAME = "https://url-shortener-node-server.onrender.com";
 
 export const ShortenerProvider = ({ children }) => {
   const [url, setUrl] = useState();
@@ -31,7 +30,6 @@ export const ShortenerProvider = ({ children }) => {
 
   const updateUrlContent = (data) => {
     setUrl(data);
-    console.log(data);
   };
 
   const getAllShortenedsLinks = async () => {
