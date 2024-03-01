@@ -1,5 +1,7 @@
+import { SOCKET_HOSTNAME } from "../env/externalsUrls";
+
 export const getLatestComments = async () => {
-  return fetch("http://127.0.0.1:8070")
+  return fetch(SOCKET_HOSTNAME)
     .then(async (response) => {
       if (!response.ok)
         throw { message: "A ocurrido un error al obtener los comentarios" };
