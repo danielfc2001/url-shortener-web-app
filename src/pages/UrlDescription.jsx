@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import DashboardModalEditInput from "../components/DashboardModalEditInput";
-import DashboardModalTimestamp from "../components/DashboardModalTimestamp";
-import DashboardModalLockedBtn from "../components/DashboardModalLockedBtn";
-import DashboardModalDescriptionField from "../components/DashboardModalDescriptionField";
+import DashboardEditInput from "../components/UrlDescriptionComponents/DashboardEditInput";
+import DashboardLinkTimestamp from "../components/UrlDescriptionComponents/DashboardLinkTimestamp";
+import DashboardLinkLockedBtn from "../components/UrlDescriptionComponents/DashboardLinkLockedBtn";
+import DashboardDescriptionField from "../components/UrlDescriptionComponents/DashboardDescriptionField";
 import useDashboardModal from "../hooks/useDashboardModal";
 import DashboardTrafficCharts from "../components/UrlDescriptionComponents/DashboardTrafficCharts";
 
@@ -13,18 +12,17 @@ const UrlDescription = () => {
   const { data, modalEditActive } = useDashboardModal(id);
   return (
     <>
-      <div className="dashboard-modal-row">
-        <div className="dashboard-modal-col">
+      <div className="dashboard-description-row">
+        <div className="dashboard-description-col">
           <h5 className="dashboard-modal-edit-title">Editar campos</h5>
-          <DashboardModalDescriptionField
+          <DashboardDescriptionField
             id={"modalTitleContent"}
             content={data.title != null ? data.title : "Default Title"}
             type={"title"}
-          />
-          {modalEditActive === "title" && (
-            <DashboardModalEditInput type="title" />
-          )}
-          <DashboardModalDescriptionField
+          >
+            {modalEditActive === "title" && <DashboardEditInput type="title" />}
+          </DashboardDescriptionField>
+          <DashboardDescriptionField
             id={"modalDescriptionContent"}
             content={
               data.description != null
@@ -32,30 +30,32 @@ const UrlDescription = () => {
                 : "Default Description"
             }
             type={"description"}
-          />
-          {modalEditActive === "description" && (
-            <DashboardModalEditInput type="description" />
-          )}
-          <DashboardModalDescriptionField
+          >
+            {modalEditActive === "description" && (
+              <DashboardEditInput type="description" />
+            )}
+          </DashboardDescriptionField>
+
+          <DashboardDescriptionField
             id={"modalUrlContent"}
             content={data.baseUrl != null ? data.baseUrl : "Not Url Found"}
             type={"baseUrl"}
-          />
-          {modalEditActive === "baseUrl" && (
-            <DashboardModalEditInput type="baseUrl" />
-          )}
-          <div className="dashboard-modal-content">
+          >
+            {modalEditActive === "baseUrl" && (
+              <DashboardEditInput type="baseUrl" />
+            )}
+          </DashboardDescriptionField>
+          <div className="dashboard-field-content">
             <span>
               Enlace Acortado:{" "}
               {data.shortUrl != null ? data.shortUrl : "Not Url Found"}
             </span>
           </div>
-          <DashboardModalLockedBtn id={id} />
+          <DashboardLinkLockedBtn id={id} />
         </div>
-        <div className="dashboard-modal-col">
+        <div className="dashboard-description-col">
           <h5 className="dashboard-modal-edit-title">Informacion util</h5>
-          <DashboardModalTimestamp id={id} />
-          <h5 className="dashboard-modal-edit-title mt-2">Estadisticas</h5>
+          <DashboardLinkTimestamp id={id} />
         </div>
       </div>
       <DashboardTrafficCharts id={id} />

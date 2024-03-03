@@ -1,7 +1,7 @@
 import React from "react";
-import { useShortener } from "../context/ShortenerContext";
+import { useShortener } from "../../context/ShortenerContext";
 
-const DashboardModalEditBtn = ({ type }) => {
+const DashboardEditBtn = ({ type }) => {
   const { handleShowEditContentModal } = useShortener();
   const handleClick = (e) => {
     handleShowEditContentModal(type);
@@ -9,7 +9,7 @@ const DashboardModalEditBtn = ({ type }) => {
   return (
     <button
       type="button"
-      className="dashboard-modal-edit-btn"
+      className="dashboard-description-edit-btn"
       onClick={handleClick}
     >
       <i className="bi bi-pencil-square me-1"></i>
@@ -18,4 +18,4 @@ const DashboardModalEditBtn = ({ type }) => {
   );
 };
 
-export default DashboardModalEditBtn;
+export default DashboardEditBtn;

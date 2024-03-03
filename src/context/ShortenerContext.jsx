@@ -10,8 +10,6 @@ export const useShortener = () => {
 };
 
 export const ShortenerProvider = ({ children }) => {
-  const [url, setUrl] = useState();
-  const [urlShortened, setUrlShortened] = useState();
   const [shortenerErrors, setShortenerErrors] = useState();
   const [shortenedUrls, setShortenedsUrls] = useState([]);
   const [pendingShorteneds, setPendingShorteneds] = useState(false);
@@ -20,17 +18,9 @@ export const ShortenerProvider = ({ children }) => {
     status: null,
     message: null,
   });
-  const [modalCardActive, setModalCardActive] = useState({
-    status: false,
-    id: null,
-  });
   const [modalEditActive, setModalEditActive] = useState("");
   const [updatePending, setUpdatePending] = useState(false);
   const [quickSearchShorteneds, setQuickSearchShorteneds] = useState([]);
-
-  const updateUrlContent = (data) => {
-    setUrl(data);
-  };
 
   const getAllShortenedsLinks = async () => {
     try {
@@ -56,34 +46,6 @@ export const ShortenerProvider = ({ children }) => {
   useEffect(() => {
     getAllShortenedsLinks();
   }, []);
-
-  const createNewShortenedUrl = async () => {
-    try {
-      const requestData = JSON.stringify({
-        url,
-      });
-      const response = await fetch(`${HOSTNAME}/api/create`, {
-        method: "POST",
-        body: requestData,
-        mode: "cors",
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-      if (!response.ok)
-        throw new Error(
-          "Se a producido un error al procesar la informacion en la API."
-        );
-      const data = await response.json();
-      if (!data)
-        throw new Error(
-          "Se a producido un error al procesar la informacion en la API."
-        );
-      setUrlShortened(data.shortUrl);
-    } catch (error) {
-      setShortenerErrors(error.message);
-    }
-  };
 
   // Deleting errors of shortener petition after 5s
   useEffect(() => {
@@ -137,7 +99,7 @@ export const ShortenerProvider = ({ children }) => {
     }
   };
 
-  const updateUserShortenedUrl = async (data, type) => {
+  const updateUserShortenedUrl = async (data, id, type) => {
     try {
       setUpdatePending(true);
       const selectTypeOfField = (data, field) => {
@@ -158,17 +120,14 @@ export const ShortenerProvider = ({ children }) => {
       if (!storage)
         throw new Error("Debe autenticarse para poder acceder a este recurso.");
       const bodyData = JSON.stringify(selectTypeOfField(data, type));
-      const response = await fetch(
-        `${HOSTNAME}/api/${modalCardActive.id}?token=${storage}`,
-        {
-          method: "PUT",
-          body: bodyData,
-          mode: "cors",
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${HOSTNAME}/api/${id}?token=${storage}`, {
+        method: "PUT",
+        body: bodyData,
+        mode: "cors",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
       if (!response.ok)
         throw new Error("No se a podido actualizar el campo especificado.");
       const responseData = await response.json();
@@ -288,21 +247,6 @@ export const ShortenerProvider = ({ children }) => {
     }
   }, [insertStatus]);
 
-  const handleShowModalCard = (id) => {
-    setModalCardActive({
-      status: true,
-      id,
-    });
-  };
-
-  const handleHiddeModalCard = () => {
-    setModalCardActive({
-      status: false,
-      id: null,
-    });
-    setModalEditActive("");
-  };
-
   const handleShowEditContentModal = (target) => {
     setModalEditActive(target);
   };
@@ -310,25 +254,19 @@ export const ShortenerProvider = ({ children }) => {
   return (
     <ShortenerContext.Provider
       value={{
-        urlShortened,
         shortenerErrors,
         shortenedUrls,
         pendingShorteneds,
         insertPending,
         insertStatus,
-        modalCardActive,
         modalEditActive,
         updatePending,
         quickSearchShorteneds,
-        updateUrlContent,
-        createNewShortenedUrl,
         createUserShortenedUrl,
         updateUserShortenedUrl,
         deleteUserShortenedUrl,
         searchUserShortenedUrl,
         quickSearchShortenedUrl,
-        handleShowModalCard,
-        handleHiddeModalCard,
         handleShowEditContentModal,
       }}
     >

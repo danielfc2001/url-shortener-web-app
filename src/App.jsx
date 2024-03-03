@@ -37,7 +37,7 @@ function App() {
       <main id="appContainer" className="container px-5">
         <Navbar>
           <Link to="/" className="page-navbar-brand">
-            Url.ZIP
+            SwiftURL
           </Link>
           <button
             id="togglerBtn"

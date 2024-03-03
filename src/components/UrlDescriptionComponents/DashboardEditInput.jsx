@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import FormDashboardTextError from "./FormDashboardTextError";
-import { useShortener } from "../context/ShortenerContext";
-import DashboardModalEditSuccess from "./DashboardModalEditSuccess";
+import FormDashboardTextError from "../FormDashboardTextError";
+import { useShortener } from "../../context/ShortenerContext";
+import DashboardEditSuccess from "./DashboardEditSuccess";
 
-const DashboardModalEditInput = ({ type }) => {
+const DashboardEditInput = ({ type }) => {
   const {
     register,
     handleSubmit,
@@ -68,13 +68,10 @@ const DashboardModalEditInput = ({ type }) => {
   };
 
   return (
-    <form
-      className="dashboard-modal-edit-form"
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className="dashboard-edit-form" onSubmit={handleSubmit(onSubmit)}>
       <input
         type="text"
-        className="dashboard-modal-edit-input"
+        className="dashboard-edit-input"
         {...register("editInput", {
           required: {
             value: true,
@@ -84,10 +81,10 @@ const DashboardModalEditInput = ({ type }) => {
         })}
         placeholder="Editar campo"
       />
-      <button type="submit" className="dashboard-modal-edit-confirm">
+      <button type="submit" className="dashboard-edit-confirm">
         {!updatePending ? (
           <>
-            <i class="bi bi-upload me-1"></i>Cambiar
+            <i className="bi bi-upload me-1"></i>Cambiar
           </>
         ) : (
           <>
@@ -105,9 +102,9 @@ const DashboardModalEditInput = ({ type }) => {
       {errors.editInput && (
         <FormDashboardTextError message={errors.editInput.message} />
       )}
-      {updateSuccess && <DashboardModalEditSuccess />}
+      {updateSuccess && <DashboardEditSuccess />}
     </form>
   );
 };
 
-export default DashboardModalEditInput;
+export default DashboardEditInput;

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useShortener } from "../context/ShortenerContext";
+import { useState, useEffect } from "react";
+import { useShortener } from "../../context/ShortenerContext";
 
-const DashboardModalLockedBtn = ({ id }) => {
+const DashboardLinkLockedBtn = ({ id }) => {
   const [unlocked, setUnlocked] = useState(true);
   const { shortenedUrls, updateUserShortenedUrl } = useShortener();
 
@@ -14,14 +14,14 @@ const DashboardModalLockedBtn = ({ id }) => {
   }, []);
 
   const handleClick = async (e) => {
-    const error = await updateUserShortenedUrl(!unlocked, "isUnlocked");
+    const error = await updateUserShortenedUrl(!unlocked, id, "isUnlocked");
     if (!error) setUnlocked(!unlocked);
   };
 
   return (
     <button
       type="button"
-      className="dashboard-modal-locked-btn"
+      className="dashboard-description-locked-btn"
       onClick={handleClick}
     >
       {unlocked ? (
@@ -37,4 +37,4 @@ const DashboardModalLockedBtn = ({ id }) => {
   );
 };
 
-export default DashboardModalLockedBtn;
+export default DashboardLinkLockedBtn;

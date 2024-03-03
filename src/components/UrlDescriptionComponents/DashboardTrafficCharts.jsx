@@ -1,16 +1,34 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useDashboardUrlStats from "../../hooks/useDashboardUrlStats";
 import ShortenerResultsMessage from "../ShortenerResultsMessage";
 import * as ChartJs from "chart.js/auto";
 import DashboardUrlsLoader from "../DashboardUrlsLoader";
 
 const DashboardTrafficCharts = ({ id }) => {
+  const [totalRequest, setTotalRequest] = useState({
+    weekRequest: 0,
+    monthRequest: 0,
+  });
   const { isLoading, isError, linkStats } = useDashboardUrlStats(id);
 
   useEffect(() => {
     const weekCanvas = document.getElementById("chartWeek");
     const monthCanvas = document.getElementById("chartMonth");
     if (!isLoading && !isError) {
+      setTotalRequest({
+        weekRequest: linkStats.lastWeek
+          .filter((el) => el.value != 0)
+          .reduce(
+            (prevValue, currValue) => prevValue + parseInt(currValue.value),
+            0
+          ),
+        monthRequest: linkStats.lastMonth
+          .filter((el) => el.value != 0)
+          .reduce(
+            (prevValue, currValue) => prevValue + parseInt(currValue.value),
+            0
+          ),
+      });
       const weekData = {
         labels: linkStats?.lastWeek?.reverse().map((el) => el.time),
         datasets: [
@@ -72,10 +90,12 @@ const DashboardTrafficCharts = ({ id }) => {
           <div className="dashboard-chart">
             <h3>Tráfico semanal:</h3>
             <canvas id="chartWeek"></canvas>
+            <span>Total de solicitudes: {totalRequest.weekRequest}</span>
           </div>
           <div className="dashboard-chart">
             <h3>Tráfico mensual:</h3>
             <canvas id="chartMonth"></canvas>
+            <span>Total de solicitudes: {totalRequest.monthRequest}</span>
           </div>
         </>
       )}

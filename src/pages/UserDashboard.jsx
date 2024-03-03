@@ -2,13 +2,11 @@ import DashboardUserInfo from "../components/DashboardUserInfo";
 import DashboardShortenerForm from "../components/DashboardShortenerForm";
 import DashboardSavedUrlCard from "../components/DashboardSavedUrlCard";
 import { useShortener } from "../context/ShortenerContext";
-import DashboardModalCard from "../components/DashboardModalCard";
 import DashboardSearch from "../components/DashboardSearch";
 import DashboardUrlsLoader from "../components/DashboardUrlsLoader";
 
 const UserDashboard = () => {
-  const { pendingShorteneds, modalCardActive, quickSearchShorteneds } =
-    useShortener();
+  const { pendingShorteneds, quickSearchShorteneds } = useShortener();
   return (
     <>
       <section className="d-flex align-items-start justify-content-center mt-3">
@@ -20,9 +18,6 @@ const UserDashboard = () => {
         id="dashboardCardContainer"
         className="dashboard-saved-url-container row g-3 mt-3"
       >
-        {modalCardActive.status && (
-          <DashboardModalCard id={modalCardActive.id} />
-        )}
         {pendingShorteneds ? (
           <DashboardUrlsLoader />
         ) : (

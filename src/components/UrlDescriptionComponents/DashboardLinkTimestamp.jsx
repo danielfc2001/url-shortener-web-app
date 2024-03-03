@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useShortener } from "../context/ShortenerContext";
+import { useShortener } from "../../context/ShortenerContext";
 
-const DashboardModalTimestamp = ({ id }) => {
+const DashboardLinkTimestamp = ({ id }) => {
   const [timestamp, setTimestamp] = useState({
     created: null,
     updated: null,
@@ -15,11 +15,11 @@ const DashboardModalTimestamp = ({ id }) => {
     });
   }, []);
   return (
-    <div className="dashboard-modal-timestamp">
+    <div className="dashboard-description-timestamp">
       <span>Creado el: {timestamp.created}</span>
       <span>Ultima actualización: {timestamp.updated}</span>
     </div>
   );
 };
 
-export default DashboardModalTimestamp;
+export default DashboardLinkTimestamp;

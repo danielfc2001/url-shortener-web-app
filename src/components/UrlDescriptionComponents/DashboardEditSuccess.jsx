@@ -1,6 +1,6 @@
 import React from "react";
 
-const DashboardModalEditSuccess = () => {
+const DashboardEditSuccess = () => {
   return (
     <div className="shortener-form-user-error">
       <i className="bi bi-check-circle me-1"></i>
@@ -9,4 +9,4 @@ const DashboardModalEditSuccess = () => {
   );
 };
 
-export default DashboardModalEditSuccess;
+export default DashboardEditSuccess;
