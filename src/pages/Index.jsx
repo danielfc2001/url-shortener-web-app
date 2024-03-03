@@ -1,7 +1,6 @@
 import React from "react";
 import ShortenerSection from "../components/IndexPageComponents/ShortenerSection";
 import AccessInfo from "../components/AccessInfo";
-import ServiceStats from "../components/ServiceStats";
 import CommentBox from "../components/IndexPageComponents/CommentBox";
 
 const Index = () => {
@@ -34,9 +33,7 @@ const Index = () => {
           <p>Geotarget your audience with localized links</p>
         </div>
       </div>
-      <div className="container-separator"></div>
-      <AccessInfo />
-      <div className="container-separator"></div>
+      {/* <AccessInfo /> */}
       <CommentBox />
     </>
   );

@@ -24,7 +24,7 @@ const DashboardShortenerForm = () => {
   }, [insertPending]);
 
   return (
-    <article className="w-50">
+    <>
       <form className="shortener-form-user" onSubmit={handleSubmit(onSubmit)}>
         <div className="shortener-form-user-input-group">
           <input
@@ -87,7 +87,7 @@ const DashboardShortenerForm = () => {
           Crear Url
         </button>
       </form>
-    </article>
+    </>
   );
 };
 

@@ -9,7 +9,7 @@ const UserDashboard = () => {
   const { pendingShorteneds, quickSearchShorteneds } = useShortener();
   return (
     <>
-      <section className="d-flex align-items-start justify-content-center mt-3">
+      <section className="dashboard-container">
         <DashboardShortenerForm />
         <DashboardUserInfo />
       </section>

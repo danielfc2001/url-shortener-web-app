@@ -6,7 +6,7 @@ const DashboardUserInfo = () => {
   const { userInfo } = useAuth();
   const { shortenedUrls } = useShortener();
   return (
-    <article className="user-info-container w-50">
+    <article className="user-info-container">
       <h3 className="user-info-title">
         Bienvenido{" "}
         <span className="user-info-username">{userInfo.username}</span>
