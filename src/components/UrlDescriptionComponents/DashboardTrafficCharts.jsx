@@ -73,7 +73,7 @@ const DashboardTrafficCharts = ({ id }) => {
         monthChart.destroy();
       };
     }
-  }, [isLoading]);
+  }, [isLoading, linkStats]);
   return (
     <div className="dashboard-chart-container">
       {isLoading && <DashboardUrlsLoader />}
