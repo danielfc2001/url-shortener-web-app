@@ -6,7 +6,6 @@ import DashboardModalLockedBtn from "./DashboardModalLockedBtn";
 import DashboardModalDescriptionField from "./DashboardModalDescriptionField";
 import useDashboardModal from "../hooks/useDashboardModal";
 import DashboardModalStats from "./DashboardModalStats";
-import DashboardModalStatsChart from "./DashboardModalStatsChart";
 
 const DashboardModalCard = ({ id }) => {
   const element = document.getElementById("appContainer");
@@ -96,7 +95,6 @@ const Modal = ({ id }) => {
                 <DashboardModalStats id={id} />
               </div>
             </div>
-            <DashboardModalStatsChart id={id} />
           </div>
         </div>
       </div>

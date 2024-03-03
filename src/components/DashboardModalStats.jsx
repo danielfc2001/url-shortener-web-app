@@ -1,5 +1,5 @@
 import React from "react";
-import useDashboardModalStats from "../hooks/useDashboardModalStats";
+import useDashboardModalStats from "../hooks/useDashboardUrlStats";
 import AuthSectionSpinner from "./AuthSectionSpinner";
 
 const DashboardModalStats = ({ id }) => {

@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import DashboardModalEditInput from "../components/DashboardModalEditInput";
 import DashboardModalTimestamp from "../components/DashboardModalTimestamp";
 import DashboardModalLockedBtn from "../components/DashboardModalLockedBtn";
 import DashboardModalDescriptionField from "../components/DashboardModalDescriptionField";
-import DashboardModalStats from "../components/DashboardModalStats";
 import useDashboardModal from "../hooks/useDashboardModal";
+import DashboardTrafficCharts from "../components/UrlDescriptionComponents/DashboardTrafficCharts";
 
 const UrlDescription = () => {
   const params = useParams();
   const { id } = params;
   const { data, modalEditActive } = useDashboardModal(id);
-
   return (
     <>
       <div className="dashboard-modal-row">
@@ -57,10 +56,9 @@ const UrlDescription = () => {
           <h5 className="dashboard-modal-edit-title">Informacion util</h5>
           <DashboardModalTimestamp id={id} />
           <h5 className="dashboard-modal-edit-title mt-2">Estadisticas</h5>
-          <DashboardModalStats id={id} />
         </div>
       </div>
-      {/* <DashboardModalStatsChart id={id} /> */}
+      <DashboardTrafficCharts id={id} />
     </>
   );
 };

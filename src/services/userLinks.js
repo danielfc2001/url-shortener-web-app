@@ -18,3 +18,13 @@ export const getUserLinks = ({ children }) => {
       children;
     });
 };
+
+export const getLinkTraffic = async (id) => {
+  return fetch(`${HOSTNAME}/api/analytics/${id}`).then(async (response) => {
+    if (!response.ok)
+      throw {
+        message: "A ocurrido un error al obtener las estadisticas.",
+      };
+    return await response.json();
+  });
+};
