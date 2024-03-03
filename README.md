@@ -1,4 +1,8 @@
-# Url Shortener Project v.BETA
+## Url Shortener Project v.BETA
+
+### Project Demo: <br>
+
+[Ir a la demo en render](https://swifturl.onrender.com/)
 
 ### Lenguajes usados: <br>
 
@@ -21,10 +25,10 @@ Servicio de acortado de direcciones web. Esta en particular es la web del servic
   - Creación de enlaces con título y descripción que facilite su posterior busqueda.
   - Posibilidad de modificar la dirección original de algún enlace manteniendo la dirección acortada.
   - Busqueda entre las direcciones que existen en la seción.
+  - Analíticas de los enlaces guardados por semana y mes.
 
 #### Próximos cambios en el proyecto:
 
-- Habilitar las analíticas para las direcciones que tenga el usuario guardadas.
 - Habilitar el bloqueo regional para las direcciones guardadas.
 - Añadir una capa de seguridad más profunda.
 - Cambios en la estructura del proyecto y trabajo en optimización del mismo.
