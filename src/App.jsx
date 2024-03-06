@@ -2,7 +2,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Index from "./pages/Index";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Copyright from "./components/Copyright";
+import Copyright from "./components/FooterComponents/Copyright";
 import AccessPage from "./pages/Access";
 import LoginSection from "./components/LoginSection";
 import RegisterSection from "./components/RegisterSection";
@@ -16,10 +16,13 @@ import NavbarLink from "./components/NavbarLink";
 import Logout from "./pages/Logout";
 import UrlDescription from "./pages/UrlDescription";
 import { useState } from "react";
+import { useShortener } from "./context/ShortenerContext";
+import Toast from "./components/Toast";
 
 function App() {
   const [navbarVisible, setNavbarVisible] = useState();
   const { userAuthenticated, statusAuthenticated } = useAuth();
+  const { messageDeletedLink } = useShortener();
 
   const handleToggleClick = (e) => {
     const togglerBtn = document.getElementById("togglerBtn");
@@ -95,6 +98,9 @@ function App() {
         <ToastContainer>
           {statusAuthenticated.status && (
             <LoginToasts message={statusAuthenticated.message} />
+          )}
+          {messageDeletedLink && (
+            <Toast message={messageDeletedLink} key={messageDeletedLink} />
           )}
         </ToastContainer>
         <Footer>

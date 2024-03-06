@@ -1,6 +1,6 @@
 import React from "react";
-import { useAuth } from "../context/AuthContext";
-import { useShortener } from "../context/ShortenerContext";
+import { useAuth } from "../../context/AuthContext";
+import { useShortener } from "../../context/ShortenerContext";
 
 const DashboardUserInfo = () => {
   const { userInfo } = useAuth();

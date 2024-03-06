@@ -976,7 +976,10 @@ p {
     box-shadow: 0px 0px 0px 3px var(--swamp-300);
 }
 
-.shortener-form-user button {
+.shortener-form-user-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 50%;
     background-color: #398b93;
     color: var(--swamp-200);
@@ -989,12 +992,17 @@ p {
     transition: all .2s ease-in;
 }
 
-.shortener-form-user button:hover {
+.shortener-form-user-submit div {
+    width: 20px;
+    height: 20px;
+}
+
+.shortener-form-user-submit:hover {
     background-color: var(--swamp-600);
     color: var(--swamp-100);
 }
 
-.shortener-form-user button:focus {
+.shortener-form-user-submit:focus {
     background-color: var(--swamp-600);
     color: var(--swamp-100);
 }
@@ -1026,6 +1034,8 @@ p {
     color: var(--bs-warning);
     border: .1rem solid var(--bs-warning);
 }
+
+
 
 @media (max-width: 992px) {
     .dashboard-container {
@@ -1149,7 +1159,7 @@ p {
     flex-grow: 1;
     background-color: var(--swamp-800);
     transform: scale(.95);
-    padding: .5rem .5rem;
+    padding: .5rem 1rem;
     border-radius: .7rem;
     border: .5px solid var(--swamp-400);
     transition: all .1s ease-in-out;
@@ -1163,23 +1173,33 @@ p {
     font-size: 1.2rem;
     color: var(--swamp-100);
     border: 0;
-    border-radius: .5rem;
     outline: 0;
     transition: all .2s ease-in-out;
 }
 
 .dashboard-url-card-delete-btn:hover {
-    box-shadow: 0px 0px 2px 2px var(--swamp-300);
+    text-shadow: 0px 0px 7px var(--swamp-100);
 }
 
 .dashboard-url-card-delete-btn:focus {
-    background-color: var(--swamp-800);
-    box-shadow: 0px 0px 2px 2px var(--swamp-300);
+    text-shadow: 0px 0px 7px var(--swamp-100);
+}
+
+@keyframes animation-rotate {
+    from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+}
+
+.bi-arrow-clockwise  {
+    animation: animation-rotate infinite .5s ease-in-out;
 }
 
 .dashboard-shortened-card:hover {
     transform: scale(1);
-    box-shadow: 0px 0px 5px 4px var(--swamp-400);
 }
 
 .dashboard-url-card-options-btn {
@@ -1215,12 +1235,11 @@ p {
     color: var(--swamp-400);
 }
 
-.dashboard-shortened-card span {
+.dashboard-shortened-card div {
     display: flex;
-    position: relative;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
     flex-grow: 1;
     background-color: var(--swamp-600);
     color: var(--swamp-400);
@@ -1230,19 +1249,32 @@ p {
     overflow: hidden;
 }
 
-.dashboard-shortened-card span span {
-    position: absolute;
-    left: 76%;
+.dashboard-shortened-card div span {
+    font-weight: 500;
+    color: var(--swamp-100);
+}
+
+.dashboard-shortened-card div p {
+    color: var(--swamp-200);
+    margin-bottom: 0 !important;
+}
+
+.dashboard-card-btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    width: 100%;
+    align-items: center;
     margin-bottom: 0;
     padding: 0;
     overflow: visible;
 }
 
-.dashboard-shortened-card span span button:first-child {
+.dashboard-shortened-card div span button:first-child {
     margin-right: .2rem;
 }
 
-.dashboard-shortened-card span span button {
+.dashboard-shortened-card div span button {
     background-color: var(--swamp-400);
     color: var(--swamp-100);
     border: 0px;
@@ -1251,11 +1283,11 @@ p {
     transition: all .2s ease-in-out;
 }
 
-.dashboard-shortened-card span span button:hover {
+.dashboard-shortened-card div span button:hover {
     background-color: var(--swamp-500);
 }
 
-.dashboard-shortened-card span span button:focus {
+.dashboard-shortened-card div span button:focus {
     outline: 0px;
     border: 1px solid var(--swamp-300);
 }
@@ -1568,4 +1600,17 @@ p {
     height: .1rem;
     background-color: var(--swamp-100);
     margin-block : 3rem;
+}
+
+@keyframes toast-animated {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.access-toast {
+    animation: toast-animated normal .7s ease-in-out;
 }

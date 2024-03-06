@@ -1,27 +1,36 @@
-import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import FormDashboardTextError from "./FormDashboardTextError";
-import { useShortener } from "../context/ShortenerContext";
-import DashboardFormAlert from "./DashboardFormAlert";
+import FormDashboardTextError from "../FormDashboardTextError";
+import DashboardFormAlert from "../DashboardFormAlert";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createUserLink } from "../../services/userLinks";
+import { useShortener } from "../../context/ShortenerContext";
+import AuthSectionSpinner from "../AuthSectionSpinner";
 
 const DashboardShortenerForm = () => {
+  const { newMessageDeletedLink } = useShortener();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-  const { insertPending, insertStatus, createUserShortenedUrl } =
-    useShortener();
+  const queryClient = useQueryClient();
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: async (data) => createUserLink(data),
+    onSuccess: (newLink) => {
+      queryClient.setQueryData(["userLinks"], (cachedData) => {
+        newMessageDeletedLink("Nuevo enlace agregado satisfactoriamente.");
+        return {
+          data: [...cachedData.data, newLink.data],
+        };
+      });
+    },
+  });
 
   const onSubmit = (data) => {
-    createUserShortenedUrl(data);
+    mutate(data);
     reset();
   };
-
-  useEffect(() => {
-    console.log(insertPending);
-  }, [insertPending]);
 
   return (
     <>
@@ -69,21 +78,15 @@ const DashboardShortenerForm = () => {
             <FormDashboardTextError message={errors.description.message} />
           )}
         </div>
-        {insertStatus.status === 200 && (
-          <DashboardFormAlert
-            message={insertStatus.message}
-            style={"success"}
-          />
+        {isError && (
+          <DashboardFormAlert message={error.message} style={"alert"} />
         )}
-        {insertStatus.status === 400 && (
-          <DashboardFormAlert message={insertStatus.message} style={"alert"} />
-        )}
-        <button type="submit">
-          {insertPending && (
-            <div className="spinner-border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          )}
+        <button
+          type="submit"
+          className="shortener-form-user-submit"
+          disabled={isPending}
+        >
+          {isPending && <AuthSectionSpinner />}
           Crear Url
         </button>
       </form>

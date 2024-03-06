@@ -23,6 +23,7 @@ const DashboardLinkLockedBtn = ({ id }) => {
       type="button"
       className="dashboard-description-locked-btn"
       onClick={handleClick}
+      disabled
     >
       {unlocked ? (
         <>

@@ -1,5 +1,5 @@
 import React from "react";
-import BtnSavedUrlCard from "./BtnSavedUrlCard";
+import BtnSavedUrlCard from "../BtnSavedUrlCard";
 import DashboardUrlCardDeleteBtn from "./DashboardUrlCardDeleteBtn";
 import DashboardUrlCardOptBtn from "./DashboardUrlCardOptBtn";
 
@@ -16,20 +16,22 @@ const DashboardSavedUrlCard = ({
         <DashboardUrlCardDeleteBtn id={id} />
         <h5>{title}</h5>
         <p>{description}</p>
-        <span>
-          {baseUrl}
-          <span>
+        <div>
+          <span>Base:</span>
+          <p>{baseUrl}</p>
+          <span className="dashboard-card-btn-group">
             <BtnSavedUrlCard type={"copy"} href={baseUrl} />
             <BtnSavedUrlCard type={"link"} href={baseUrl} />
           </span>
-        </span>
-        <span>
-          {shortenedUrl}
-          <span>
+        </div>
+        <div>
+          <span>Short:</span>
+          <p>{shortenedUrl}</p>
+          <span className="dashboard-card-btn-group">
             <BtnSavedUrlCard type={"copy"} href={shortenedUrl} />
             <BtnSavedUrlCard type={"link"} href={shortenedUrl} />
           </span>
-        </span>
+        </div>
         <DashboardUrlCardOptBtn id={id} />
       </div>
     </div>

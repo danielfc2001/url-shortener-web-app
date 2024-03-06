@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useShortener } from "../../context/ShortenerContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 const DashboardLinkTimestamp = ({ id }) => {
   const [timestamp, setTimestamp] = useState({
     created: null,
     updated: null,
   });
-  const { shortenedUrls } = useShortener();
+  const queryClient = useQueryClient();
   useEffect(() => {
-    const match = shortenedUrls.filter((el) => el._id === id);
+    const data = queryClient.getQueryData(["userLinks"]);
+    const match = data.data.filter((el) => el._id === id);
     setTimestamp({
       created: match[0].createdAt.slice(0, 10).split("-").reverse().join("-"),
       updated: match[0].updatedAt.slice(0, 10).split("-").reverse().join("-"),

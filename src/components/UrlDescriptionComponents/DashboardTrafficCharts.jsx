@@ -14,7 +14,7 @@ const DashboardTrafficCharts = ({ id }) => {
   useEffect(() => {
     const weekCanvas = document.getElementById("chartWeek");
     const monthCanvas = document.getElementById("chartMonth");
-    if (!isLoading && !isError) {
+    if (!isLoading && !isError && linkStats) {
       setTotalRequest({
         weekRequest: linkStats.lastWeek
           .filter((el) => el.value != 0)

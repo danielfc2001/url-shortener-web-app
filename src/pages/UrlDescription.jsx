@@ -20,7 +20,9 @@ const UrlDescription = () => {
             content={data.title != null ? data.title : "Default Title"}
             type={"title"}
           >
-            {modalEditActive === "title" && <DashboardEditInput type="title" />}
+            {modalEditActive === "title" && (
+              <DashboardEditInput id={id} type="title" />
+            )}
           </DashboardDescriptionField>
           <DashboardDescriptionField
             id={"modalDescriptionContent"}
@@ -32,7 +34,7 @@ const UrlDescription = () => {
             type={"description"}
           >
             {modalEditActive === "description" && (
-              <DashboardEditInput type="description" />
+              <DashboardEditInput id={id} type="description" />
             )}
           </DashboardDescriptionField>
 
@@ -42,7 +44,7 @@ const UrlDescription = () => {
             type={"baseUrl"}
           >
             {modalEditActive === "baseUrl" && (
-              <DashboardEditInput type="baseUrl" />
+              <DashboardEditInput id={id} type="baseUrl" />
             )}
           </DashboardDescriptionField>
           <div className="dashboard-field-content">

@@ -7,7 +7,7 @@ const useDashboardUrlStats = (id) => {
     isError,
     data: linkStats,
   } = useQuery({
-    queryKey: ["urlStats"],
+    queryKey: ["linkStats"],
     queryFn: async () => getLinkTraffic(id),
   });
   return {

@@ -1,53 +1,43 @@
-import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import FormDashboardTextError from "../FormDashboardTextError";
-import { useShortener } from "../../context/ShortenerContext";
 import DashboardEditSuccess from "./DashboardEditSuccess";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateUserLink } from "../../services/userLinks";
+import { useShortener } from "../../context/ShortenerContext";
 
-const DashboardEditInput = ({ type }) => {
+const DashboardEditInput = ({ id, type }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-  const { updatePending, updateUserShortenedUrl } = useShortener();
-  const [updateErrors, setUpdateErrors] = useState({
-    field: null,
-    message: null,
+  const { newMessageDeletedLink } = useShortener();
+  const queryClient = useQueryClient();
+  const { mutate, isPending, isError, isSuccess, error } = useMutation({
+    mutationFn: async ({ data, id, type }) =>
+      await updateUserLink(data, id, type),
+    onSuccess: async (updated) => {
+      await queryClient.setQueryData(["userLinks"], (oldData) => {
+        newMessageDeletedLink(
+          "Se actualizo el campo con éxito. Debe refrescar para ver los cambios."
+        );
+        return {
+          data: oldData.data.map((item) => {
+            if (item._id === updated.update._id) {
+              return updated.update;
+            }
+            return item;
+          }),
+        };
+      });
+    },
   });
-  const [updateSuccess, setUpdateSuccess] = useState(false);
-
-  useEffect(() => {
-    if (updateSuccess) {
-      setTimeout(() => {
-        setUpdateSuccess(false);
-      }, 3000);
-    }
-  }, [updateSuccess]);
-
-  useEffect(() => {
-    if (updateErrors.field != null) {
-      setTimeout(() => {
-        setUpdateErrors({
-          field: null,
-          message: null,
-        });
-      }, 5000);
-    }
-  }, [updateErrors]);
 
   const onSubmit = async (data) => {
-    const error = await updateUserShortenedUrl(data, type);
-    if (error) {
-      setUpdateErrors({
-        field: type,
-        message: error,
-      });
-    } else {
-      setUpdateSuccess(true);
-      reset();
-    }
+    console.log(id, type);
+    mutate({ data, id, type });
+    reset();
   };
 
   const maxLengthInputValue = (type) => {
@@ -82,7 +72,7 @@ const DashboardEditInput = ({ type }) => {
         placeholder="Editar campo"
       />
       <button type="submit" className="dashboard-edit-confirm">
-        {!updatePending ? (
+        {!isPending ? (
           <>
             <i className="bi bi-upload me-1"></i>Cambiar
           </>
@@ -96,13 +86,11 @@ const DashboardEditInput = ({ type }) => {
           </>
         )}
       </button>
-      {updateErrors.field === type && (
-        <FormDashboardTextError message={updateErrors.message} />
-      )}
+      {isError && <FormDashboardTextError message={error.message} />}
       {errors.editInput && (
         <FormDashboardTextError message={errors.editInput.message} />
       )}
-      {updateSuccess && <DashboardEditSuccess />}
+      {isSuccess && <DashboardEditSuccess />}
     </form>
   );
 };
