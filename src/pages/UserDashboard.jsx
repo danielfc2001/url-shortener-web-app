@@ -41,6 +41,7 @@ const UserDashboard = () => {
               description={el.description === null ? undefined : el.description}
               baseUrl={el.baseUrl}
               shortenedUrl={el.shortUrl}
+              unlocked={el.isUnlocked}
               key={el._id}
             />
           ))}

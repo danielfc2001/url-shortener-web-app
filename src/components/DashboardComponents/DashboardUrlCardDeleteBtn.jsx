@@ -40,7 +40,7 @@ const DashboardUrlCardDeleteBtn = ({ id }) => {
           viewBox="0 0 16 16"
         >
           <path
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"
           />
           <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
@@ -60,12 +60,12 @@ const DashboardUrlCardDeleteBtn = ({ id }) => {
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path
             d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16z"
-            stroke-width="0"
+            strokeWidth="0"
             fill="currentColor"
           />
           <path
             d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z"
-            stroke-width="0"
+            strokeWidth="0"
             fill="currentColor"
           />
         </svg>

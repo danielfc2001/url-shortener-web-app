@@ -2,6 +2,8 @@ import React from "react";
 import BtnSavedUrlCard from "../BtnSavedUrlCard";
 import DashboardUrlCardDeleteBtn from "./DashboardUrlCardDeleteBtn";
 import DashboardUrlCardOptBtn from "./DashboardUrlCardOptBtn";
+import LinkIcon from "../Icons/LinkIcon";
+import LinkOffIcon from "../Icons/LinkOffIcon";
 
 const DashboardSavedUrlCard = ({
   id,
@@ -9,6 +11,7 @@ const DashboardSavedUrlCard = ({
   description = "Default Description",
   baseUrl,
   shortenedUrl,
+  unlocked,
 }) => {
   return (
     <div className="dashboard-url-card col-md-4">
@@ -32,6 +35,19 @@ const DashboardSavedUrlCard = ({
             <BtnSavedUrlCard type={"link"} href={shortenedUrl} />
           </span>
         </div>
+        <section className="flex flex-row items-center justify-end py-2 pe-3 mb-2 text-white bg-white/10 rounded-full border border-white/10">
+          {unlocked ? (
+            <>
+              <LinkIcon width={20} height={20} />
+              <span className="flex items-center text-sm">Desbloqueado</span>
+            </>
+          ) : (
+            <>
+              <LinkOffIcon width={20} height={20} />
+              <span className="flex items-center text-sm">Bloqueado</span>
+            </>
+          )}
+        </section>
         <DashboardUrlCardOptBtn id={id} />
       </div>
     </div>
